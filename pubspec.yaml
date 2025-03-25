@@ -1,7 +1,7 @@
 name: google_places_new_flutter
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+repository: https://github.com/achequisde/google_places_new_flutter
 
 environment:
   sdk: ^3.6.2
