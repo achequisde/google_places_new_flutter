@@ -1,6 +1,6 @@
 name: google_places_new_flutter
 description: "Custom Google Places API (New) autocomplete widget for Android and iOS."
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/achequisde/google_places_new_flutter
 
 environment:

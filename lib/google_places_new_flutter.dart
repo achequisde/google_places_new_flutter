@@ -22,6 +22,7 @@ class GooglePlacesAutoCompleteTextField extends StatefulWidget {
     this.boxDecoration,
     this.inputDecoration,
     this.validator,
+    this.onClearData,
     this.textStyle,
     this.focusNode,
     this.predictionItemBuilder,
@@ -40,6 +41,7 @@ class GooglePlacesAutoCompleteTextField extends StatefulWidget {
   final List<PlacesQuery>? queries;
   final PredictionItemBuilder? predictionItemBuilder;
   final String? Function(String?)? validator;
+  final void Function()? onClearData;
   final Widget? separatorWidget;
   final EdgeInsets? containerPadding;
   final BoxDecoration? boxDecoration;
@@ -304,6 +306,10 @@ class _GooglePlacesAutoCompleteTextFieldState
       try {
         _overlayEntry?.remove();
       } catch (e) {}
+    }
+
+    if (widget.onClearData != null) {
+      widget.onClearData!();
     }
   }
 }
