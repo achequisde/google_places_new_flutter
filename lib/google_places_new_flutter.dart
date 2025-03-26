@@ -21,6 +21,7 @@ class GooglePlacesAutoCompleteTextField extends StatefulWidget {
     this.containerPadding,
     this.boxDecoration,
     this.inputDecoration,
+    this.validator,
     this.textStyle,
     this.focusNode,
     this.predictionItemBuilder,
@@ -38,6 +39,7 @@ class GooglePlacesAutoCompleteTextField extends StatefulWidget {
   final OnClickHandler? onClick;
   final List<PlacesQuery>? queries;
   final PredictionItemBuilder? predictionItemBuilder;
+  final String? Function(String?)? validator;
   final Widget? separatorWidget;
   final EdgeInsets? containerPadding;
   final BoxDecoration? boxDecoration;
@@ -78,7 +80,7 @@ class _GooglePlacesAutoCompleteTextFieldState
         .listen(textChanged);
   }
 
-  textChanged(String text) async {
+  void textChanged(String text) async {
     if (text.isNotEmpty) {
       getLocation(text);
     } else {
@@ -118,6 +120,7 @@ class _GooglePlacesAutoCompleteTextFieldState
               child: TextFormField(
                 controller: _controller,
                 textAlignVertical: TextAlignVertical.center,
+                autovalidateMode: AutovalidateMode.disabled,
                 decoration: widget.inputDecoration?.copyWith(
                   suffixIcon: (widget.closeButton &&
                           _controller.text.isNotEmpty &&
@@ -142,6 +145,7 @@ class _GooglePlacesAutoCompleteTextFieldState
                     widget.formSubmitCallback!();
                   }
                 },
+                validator: widget.validator,
                 onChanged: (value) {
                   subject.add(value);
 
@@ -153,24 +157,6 @@ class _GooglePlacesAutoCompleteTextFieldState
                 },
               ),
             ),
-            // if (widget.closeButton &&
-            //     _controller.text.isNotEmpty &&
-            //     _showCloseButton)
-            //   IconButton(
-            //     icon: Icon(
-            //       Icons.close,
-            //     ),
-            //     iconSize: 20.0,
-            //     onPressed: clearData,
-            //     padding: EdgeInsets.zero,
-            //   )
-            // else
-            //   Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: SizedBox(
-            //       width: 20.0,
-            //     ),
-            //   ),
           ],
         ),
       ),
